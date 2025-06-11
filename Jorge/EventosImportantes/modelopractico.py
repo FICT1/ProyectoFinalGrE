@@ -3,8 +3,8 @@ import os
 os.system("cls || clear")
 eventos = []
 participantes = []
-print ("**Evento Especifico o Nombre del Evento** \n(Dentro de Iglesia)")
-evento = input("Escriba el tipo de evento o el nombre \n-> ")
+print ("**Evento Especifico/Dia de servicio \n(Dentro de Iglesia)")
+evento = input("Escriba el dia del servicio o evento \n-> ")
 cant_participantes = int(input("Escriba la cantidad de personas que participaron en el evento \n-> "))
 eventos.append(evento)
 
