@@ -5,29 +5,32 @@
 #Se ha hecho alguna donacion extra en la iglesia??
 #una bienvenida para el usuario
 
-
 from operaciones import (
-    limpiar_pantalla as lim,
-    menu as m,
-    agregarmonto,
-    eliminarmontos,
-    vermontos,
-    cargar_donaciones
+    cargar_datos, menu, agregarmonto, agregarespecie,
+    vermontos, verespecies, eliminarmontos, eliminarespecie
 )
 
-
-def main ():
-    cargar_donaciones()
+def main():
+    cargar_datos()
     while True:
-        if m() == "1":
-            lim()
+        opcion = menu()
+        if opcion == '1':
             agregarmonto()
-        elif m() == "2":
-            lim()
-            eliminarmontos()
-        elif m() == "3":
-            lim()
+        elif opcion == '2':
+            agregarespecie()
+        elif opcion == '3':
             vermontos()
-        elif m() == "4":
-            lim()
+        elif opcion == '4':
+            verespecies()
+        elif opcion == '5':
+            eliminarmontos()
+        elif opcion == '6':
+            eliminarespecie()
+        elif opcion == '7':
+            print("Gracias por usar el sistema.")
             break
+        else:
+            print("Opción inválida.")
+            input("Presiona Enter para continuar...")
+
+main()
