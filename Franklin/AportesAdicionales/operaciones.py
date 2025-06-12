@@ -77,7 +77,7 @@ def agregarmonto():
         nombre = input("Nombre del donante: ").capitalize()
         monto = float(input("Monto entregado: "))
         moneda = input("Tipo de moneda (cordobas/dolares): ").lower()
-        fecha = input("Fecha de la donación (dd-mm-aaaa): ")
+        fecha = input("Fecha de la donación (dd-mm-aa): ")
 
         if moneda == "cordobas":
             usd = monto / TASA_CAMBIO
@@ -122,7 +122,7 @@ def vermontos():
         print("Donaciones monetarias:")
         total_usd = 0
         for i, d in enumerate(donaciones, start=1):
-            print(f"{i}. {d['nombre']} dio {d['monto']}{d['C$']}\nEn (USD: {d['usd']:.2f}$) el {d['fecha']}")
+            print(f"({i}). {d['nombre']} dono {d['monto']:.2f} {d['moneda']} \n-En (USD: {d['usd']:.2f}$) \n-Fecha Ingresada: {d['fecha']}")
             total_usd += d['usd']
         print(f"\nTotal equivalente en USD: ${total_usd:.2f}")
     input("Presiona Enter para continuar...")
@@ -133,7 +133,7 @@ def verespecies():
     else:
         print("Donaciones en especie:")
         for i, e in enumerate(especies, start=1):
-            print(f"{i}. {e['nombre']}: '{e['objeto']}', \n{e['fecha']}")
+            print(f"{i}. {e['nombre']}: '{e['objeto']}' \nFecha Ingresada:{e['fecha']}")
     input("Presiona Enter para continuar...")
 
 def eliminarmontos():
