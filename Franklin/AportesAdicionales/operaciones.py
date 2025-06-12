@@ -10,8 +10,8 @@ import os
 from datetime import datetime
 
 TASA_CAMBIO = 36.6243
-ARCHIVO_DONACIONES = "donaciones.txt"
-ARCHIVO_ESPECIES = "especies.txt"
+ARCHIVO_DONACIONES = "DonacionesAgregadas.txt"
+ARCHIVO_ESPECIES = "EspeciesAgregadas.txt"
 
 donaciones = []
 especies = []
@@ -104,7 +104,7 @@ def agregarespecie():
     try:
         nombre = input("Nombre del donante: ").capitalize()
         objeto = input("Descripción del objeto donado: ")
-        fecha = input("Fecha de la donación (dd-mm-aaaa): ")
+        fecha = input("Fecha de la donación (dd-mm-aa): ")
         especies.append({
             "nombre": nombre,
             "objeto": objeto,
@@ -122,7 +122,7 @@ def vermontos():
         print("Donaciones monetarias:")
         total_usd = 0
         for i, d in enumerate(donaciones, start=1):
-            print(f"{i}. {d['nombre']} dio {d['monto']} {d['moneda']} (USD ${d['usd']:.2f}) el {d['fecha']}")
+            print(f"{i}. {d['nombre']} dio {d['monto']}{d['C$']}\nEn (USD: {d['usd']:.2f}$) el {d['fecha']}")
             total_usd += d['usd']
         print(f"\nTotal equivalente en USD: ${total_usd:.2f}")
     input("Presiona Enter para continuar...")
@@ -133,7 +133,7 @@ def verespecies():
     else:
         print("Donaciones en especie:")
         for i, e in enumerate(especies, start=1):
-            print(f"{i}. {e['nombre']} donó '{e['objeto']}' el {e['fecha']}")
+            print(f"{i}. {e['nombre']}: '{e['objeto']}', \n{e['fecha']}")
     input("Presiona Enter para continuar...")
 
 def eliminarmontos():
