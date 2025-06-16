@@ -17,7 +17,7 @@ donaciones = []
 especies = []
 
 def limpiarpantalla():
-    os.system("cls" if os.name == "nt" else "clear")
+    os.system("cls || clear")
 
 def cargar_datos():
     global donaciones, especies
@@ -60,12 +60,14 @@ def guardar_especies():
 
 def menu():
     limpiarpantalla()
-    print("--Bienvenido al apartado de donaciones extras--")
+    print("-------Bienvenido al apartado de donaciones extras-------")
     print("=============================================================")
     print("(1). Agregar donación monetaria")
     print("(2). Agregar donación en especie")
+    print("")
     print("(3). Ver donaciones monetarias")
     print("(4). Ver donaciones en especie")
+    print("")
     print("(5). Eliminar donación monetaria")
     print("(6). Eliminar donación en especie")
     print("(7). Salir")
@@ -133,7 +135,7 @@ def verespecies():
     else:
         print("Donaciones en especie:")
         for i, e in enumerate(especies, start=1):
-            print(f"{i}. {e['nombre']}: '{e['objeto']}' \nFecha Ingresada:{e['fecha']}")
+            print(f"({i}). {e['nombre']}: '{e['objeto']}' \nFecha Ingresada:{e['fecha']}")
     input("Presiona Enter para continuar...")
 
 def eliminarmontos():
