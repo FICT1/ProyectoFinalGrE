@@ -32,34 +32,76 @@ def main ():
         lim()
         op=sub_menu()
         if op=="1":
-            donacion=DonacionesExtra()
-            donacion.ingresar_datos()
-            dao.agregar_donacion_extra(donacion)
+            nombre=input("Ingrese su nombre \n-> ")
+            try:
+                monto=float(input("Ingrese el monto \n-> "))
+                moneda=input("Ingrese la moneda (cordobas|dolares) \n-> ")
+                fecha=input("Ingrese la fecha (dd-mm-aa) \n-> ")
+                donacion=DonacionesExtra(nombre,monto,moneda,fecha)
+                dao.agregar_donacion_extra(donacion)
+                print("Donacion agregada con exito")
+            except ValueError:
+                print(f"Error: Porfavor ingrese un monto valido")
             pausa()
-        elif op=="2":
-            donacion=DonacionesEspecie()
-            donacion.ingresar_datos()
-            dao.agregar_donacion_especie(donacion)
+        
+        elif op == "2":
+            nombre = input("Ingrese su nombre \n-> ")
+            especie = input("Ingrese la especie \n-> ")
+            fecha = input("Ingrese la fecha (dd-mm-aa) \n-> ")
+            especie = DonacionesEspecie(nombre, especie, fecha)
+            dao.agregar_donacion_especie(especie)
+            print("Donacion agregada con exito")
             pausa()
-        elif op=="3":
-            dao.mostrar_donaciones()
+
+        elif op == "3":
+            if not dao.guardar_especies():
+                print("No hay donaciones monetarias")
+            else: 
+                print("Donaciones monetarias:")
+                total_usd = 0
+                for i, d in enumerate(dao.donaciones, start=1):
+                    print(f"({i}) {d}")
+                    total_usd += d.usd
+                print(f"\nTotal equivalente en USD: ${total_usd:.2f}")
             pausa()
-        elif op=="4":
-            dao.mostrar_especies()
+
+        elif op == "4":
+            if not dao.guardar_especies():
+                print("No hay donaciones en especie")
+            else:
+                print("Donaciones en especie:")
+                for i, d in enumerate(dao.donaciones_especie, start=1):
+                    print(f"({i}) {d}")
             pausa()
-        elif op=="5":
-            dao.mostrar_donaciones()
-            indice=int(input("Ingrese el indice de la donacion que desea eliminar: "))
-            dao.eliminar_donacion_extra(indice)
+
+        elif op == "5":
+            if not dao.eliminar_donacion_extra():
+                print("No hay donaciones monetarias")
+            else:
+                print("Donaciones monetarias:")
+                for i, d in enumerate(dao.donaciones, start=1):
+                    print(f"({i}) {d}")
+                indice = int(input("Ingrese el número de la donación a eliminar: "))
+                dao.eliminar_donacion_extra(indice - 1)
             pausa()
-        elif op=="6":
-            dao.mostrar_especies()
-            indice=int(input("Ingrese el indice de la donacion que desea eliminar: "))
-            dao.eliminar_donacion_especie(indice)
+
+        elif op == "6":
+            if not dao.eliminar_donacion_especie():
+                print("No hay donaciones en especie")
+            else:
+                print("Donaciones en especie:")
+                for i, d in enumerate(dao.donaciones_especie, start=1):
+                    print(f"({i}) {d}")
+                indice = int(input("Ingrese el número de la donación a eliminar: "))
+                dao.eliminar_donacion_especie(indice - 1)
             pausa()
-        elif op=="7":
+
+        elif op == "7":
             break
-        else:
+
+        else: 
             print("Opcion no valida")
             pausa()
 
+    dao.guardar_donaciones()
+    dao.guardar_especies()
