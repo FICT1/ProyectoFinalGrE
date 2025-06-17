@@ -6,4 +6,4 @@ class DonacionesEspecie:
         self.fecha = fecha
 
     def __str__(self):
-        return f"{self.nombre} dono {self.especie} \n-Fecha: {self.fecha}"
+        return f"{self.nombre} dono: '{self.especie}' \n-Fecha: {self.fecha}"

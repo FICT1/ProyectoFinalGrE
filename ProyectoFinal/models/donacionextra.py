@@ -19,6 +19,7 @@ class DonacionesExtra:
         except ValueError as e:
             print(e)
             return None
+        
     def __str__(self):
         return (
             f"{self.nombre} donó {self.monto} {self.moneda} \n"f"-Equivalente en USD: ${self.usd} \n"f"-Fecha: {self.fecha}")

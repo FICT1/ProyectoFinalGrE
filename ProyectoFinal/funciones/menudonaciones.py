@@ -19,7 +19,7 @@ def sub_menu():
 
 def lim():
     import os
-    os.system("cls ||clear")
+    os.system("cls || clear")
 
 def pausa():
     input("Presiona Enter para continuar...")
@@ -54,7 +54,7 @@ def main ():
             pausa()
 
         elif op == "3":
-            if not dao.guardar_especies():
+            if not dao.donaciones:
                 print("No hay donaciones monetarias")
             else: 
                 print("Donaciones monetarias:")
@@ -66,7 +66,7 @@ def main ():
             pausa()
 
         elif op == "4":
-            if not dao.guardar_especies():
+            if not dao.donaciones_especie:
                 print("No hay donaciones en especie")
             else:
                 print("Donaciones en especie:")
@@ -75,28 +75,44 @@ def main ():
             pausa()
 
         elif op == "5":
-            if not dao.eliminar_donacion_extra():
-                print("No hay donaciones monetarias")
+            if not dao.donaciones:
+                print("No hay donaciones monetarias para eliminar.")
             else:
                 print("Donaciones monetarias:")
                 for i, d in enumerate(dao.donaciones, start=1):
                     print(f"({i}) {d}")
-                indice = int(input("Ingrese el número de la donación a eliminar: "))
-                dao.eliminar_donacion_extra(indice - 1)
+                try:
+                    indice = int(input("Ingrese el número de la donación a eliminar: ")) - 1
+                    eliminado = dao.eliminar_donacion_extra(indice)
+                    if eliminado:
+                        print(f"Donación de {eliminado.nombre} eliminada.")
+                    else:
+                        print("Índice inválido.")
+                except ValueError:
+                    print("Entrada inválida.")
             pausa()
 
+
         elif op == "6":
-            if not dao.eliminar_donacion_especie():
-                print("No hay donaciones en especie")
+            if not dao.donaciones_especie:
+                print("No hay donaciones en especie para eliminar.")
             else:
                 print("Donaciones en especie:")
                 for i, d in enumerate(dao.donaciones_especie, start=1):
                     print(f"({i}) {d}")
-                indice = int(input("Ingrese el número de la donación a eliminar: "))
-                dao.eliminar_donacion_especie(indice - 1)
+                try:
+                    indice = int(input("Ingrese el número de la donación a eliminar: ")) - 1
+                    eliminado = dao.eliminar_donacion_especie(indice)
+                    if eliminado:
+                        print(f"Donación de {eliminado.nombre} eliminada.")
+                    else:
+                        print("Índice inválido.")
+                except ValueError:
+                    print("Entrada inválida.")
             pausa()
 
         elif op == "7":
+            print("Gracias por usar este apartado:)")
             break
 
         else: 

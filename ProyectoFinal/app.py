@@ -1,3 +1,3 @@
-from funciones.menu import main
+from funciones.menudonaciones import main
 
 main()
