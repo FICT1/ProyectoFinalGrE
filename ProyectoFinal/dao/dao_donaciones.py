@@ -43,12 +43,14 @@ class DonacionesDAO:
     def guardar_donaciones(self):
         with open(ARCHIVO_DONACIONES, "w", encoding="utf-8") as f:
             for d in self.donaciones:
-                f.write(f"{d.nombre} dono '{d.monto:.2f}C$' {d.moneda} \n-En dolares: {d.usd:.2f}$ \n-Fecha: {d.fecha}")
+                f.write("==Donaciones monetarias==\n")
+                f.write(f"*{d.nombre}* dono '{d.monto:.2f}C$' {d.moneda} \n-En dolares: {d.usd:.2f}$ \n-Fecha: {d.fecha}\n")
 
     def guardar_especies(self):
         with open(ARCHIVO_ESPECIE, "w", encoding="utf-8") as f:
             for e in self.donaciones_especie:
-                f.write(f"{e.nombre} dono {e.especie} \n-Fecha: {e.fecha}\n")
+                f.write("==Donaciones en especie==\n")
+                f.write(f"*{e.nombre}* dono {e.especie} \n-Fecha: {e.fecha}\n")
 
     
     
