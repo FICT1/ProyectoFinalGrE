@@ -1,8 +1,9 @@
+# dao/OfrendasDao.py
 import os
 from datetime import datetime
 from models.ofrendas import HistoriaOfrendas_dao
 
-ARCHIVO_OFRENDAS = "Historial_Ofrendas.txt"  
+ARCHIVO_OFRENDAS = "Historial_Ofrendas.txt"
 
 class Gestion_ofrendasDao:
     def __init__(self):
@@ -10,11 +11,11 @@ class Gestion_ofrendasDao:
         self.cargar_ofrendas()
 
     def cargar_ofrendas(self):
+        """Carga las ofrendas desde el archivo al iniciar."""
         os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
         if os.path.exists(ARCHIVO_OFRENDAS):
             try:
-                with open(ARCHIVO_OFRENDAS, "r") as archivo:
-                    self.ofrendas = []
+                with open(ARCHIVO_OFRENDAS, "r", encoding='utf-8') as archivo:
                     for linea in archivo:
                         if linea.strip():
                             try:
@@ -33,20 +34,22 @@ class Gestion_ofrendasDao:
         else:
             print(f"Archivo {ARCHIVO_OFRENDAS} no encontrado. Se creará al guardar.")
 
-    def respaldar_archivo(self):
-        if os.path.exists(ARCHIVO_OFRENDAS):
-            try:
-                fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
-                archivo_respaldo = f"{ARCHIVO_OFRENDAS}.{fecha}.bak"
-                with open(ARCHIVO_OFRENDAS, "r") as origen, open(archivo_respaldo, "w") as destino:
-                    destino.write(origen.read())
-                print(f"Respaldo creado: {archivo_respaldo}")
-            except IOError as e:
-                print(f"Error al crear respaldo: {e}")
-            except Exception as e:
-                print(f"Error inesperado al crear respaldo: {e}")
+    def guardar_ofrendas(self):
+        """Guarda las ofrendas en el archivo como texto plano, sobrescribiendo el existente."""
+        os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
+        try:
+            with open(ARCHIVO_OFRENDAS, "w", encoding='utf-8') as archivo:
+                for ofrenda in self.ofrendas:
+                    archivo.write(f"{ofrenda.fecha}, {ofrenda.monto:.2f}\n")
+        except IOError as e:
+            print(f"Error al escribir en el archivo: {e}")
+            raise
+        except Exception as e:
+            print(f"Error inesperado al guardar ofrendas: {e}")
+            raise
 
     def archivar_ofrendas(self, monto):
+        """Archiva una nueva ofrenda con la fecha actual."""
         try:
             monto = float(monto)
             if monto <= 0:
@@ -59,12 +62,11 @@ class Gestion_ofrendasDao:
             os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
             if not os.path.exists(ARCHIVO_OFRENDAS):
                 with open(ARCHIVO_OFRENDAS, "w") as archivo:
-                    pass
+                    pass  # Crear archivo vacío
 
-            self.respaldar_archivo()
-            with open(ARCHIVO_OFRENDAS, "a") as archivo:
-                archivo.write(f"{fecha}, {monto:.2f}\n")
-            self.ofrendas.append(ofrenda)  # Sincronizar self.ofrendas
+            # Sincronizar antes de escribir
+            self.ofrendas.append(ofrenda)
+            self.guardar_ofrendas()
             print(f"Ofrenda de C${monto:.2f} archivada el {fecha} en {ARCHIVO_OFRENDAS}")
         except ValueError as e:
             print(f"Error: {e}")
@@ -77,11 +79,12 @@ class Gestion_ofrendasDao:
             raise
 
     def mostrar_ofrendas(self):
+        """Muestra una lista del historial de ofrendas ingresadas con su fecha y monto."""
         if not self.ofrendas:
             print("No hay ofrendas archivadas.")
             return
         print("\n=== Lista de Ofrendas Registradas ===")
-        print(f"{'Fecha':<12} {'Monto':>10}") 
+        print(f"{'Fecha':<12} {'Monto':>10}")
         print("-" * 24)
         for ofrenda in self.ofrendas:
             try:
@@ -96,6 +99,7 @@ class Gestion_ofrendasDao:
         print("=" * 24)
 
     def eliminar_ofrenda(self, monto):
+        """Elimina una ofrenda por monto con opción de selección por fecha."""
         if not os.path.exists(ARCHIVO_OFRENDAS):
             print("No hay ofrendas archivadas.")
             return False
@@ -105,12 +109,12 @@ class Gestion_ofrendasDao:
             if monto <= 0:
                 raise ValueError("El monto debe ser mayor que cero.")
 
-            with open(ARCHIVO_OFRENDAS, "r") as archivo:
+            with open(ARCHIVO_OFRENDAS, "r", encoding='utf-8') as archivo:
                 lineas = archivo.readlines()
 
-            coincidencias = [(fecha, m, linea) for linea in lineas if linea.strip() 
-                            for fecha, m in [linea.strip().split(", ")] 
-                            if abs(float(m) - monto) < 0.01]
+            coincidencias = [(fecha, m, linea) for linea in lineas if linea.strip()
+                           for fecha, m in [linea.strip().split(", ")]
+                           if abs(float(m) - monto) < 0.01]
 
             if not coincidencias:
                 print(f"No se encontró una ofrenda de C${monto:.2f}.")
@@ -144,7 +148,7 @@ class Gestion_ofrendasDao:
                     print("Entrada inválida.")
                     return False
 
-            with open(ARCHIVO_OFRENDAS, "w") as archivo:
+            with open(ARCHIVO_OFRENDAS, "w", encoding='utf-8') as archivo:
                 archivo.writelines(nuevas_lineas)
             return True
 
@@ -159,6 +163,7 @@ class Gestion_ofrendasDao:
             return False
 
     def calcular_total_ofrendas(self):
+        """Calcula y muestra el total de todas las ofrendas."""
         if not self.ofrendas:
             print("No hay ofrendas archivadas para calcular el total.")
             return 0.0
