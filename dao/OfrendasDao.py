@@ -62,6 +62,7 @@ class Gestion_ofrendasDao:
             os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
             if not os.path.exists(ARCHIVO_OFRENDAS):
                 with open(ARCHIVO_OFRENDAS, "w") as archivo:
+                    archivo.write(f"{fecha},{monto}\n")
                     pass  # Crear archivo vacío
 
             # Sincronizar antes de escribir
