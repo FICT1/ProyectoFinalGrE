@@ -30,11 +30,7 @@ class Manipular:
                 lineas = archivo.readlines()
                 lineas = [linea.strip() for linea in lineas]
                 for linea in lineas:
-                    if linea.startswith(f"{d})"):
-                        print("Diezmo encontrado:")
-                        print(linea)
-                        break
-                    elif d in linea:
+                    if d in linea:
                         print("Diezmo encontrado:")
                         print(linea)
                         break
@@ -47,6 +43,7 @@ class Manipular:
                 for linea in lineas:
                     if d in linea:
                         lineas.remove(linea)
+                        print(f"Diezmo '{d}' eliminado correctamente")
                         break
                 archivo.writelines(lineas)
         else:
@@ -61,9 +58,7 @@ class Manipular:
                     if d in linea:
                         lineas.remove(linea)
                         break
-                archivo.writelines(lineas)
-        else:
-            print("El archivo de respaldo no existe.")           
+                archivo.writelines(lineas)         
 
     def mostrar(self):
         return self.lista
