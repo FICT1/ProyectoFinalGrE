@@ -22,9 +22,11 @@ def regresar():
     input(" \nPresione enter para regresar   ")
 
 def menu():
+    print("\n======= Gestion de Diezmos =======")
+    print("="*34)
     print("1 = Agregar diezmos \n2 = Mostrar total diezmos \n3 = Buscar diezmos")
     print("4 = Eliminar diezmos \n5 = Salir")
-
+    print("="*34)
 def realizar(op):
     from modelos.participantes import Participante
     from dao.manipular import Manipular
