@@ -1,7 +1,7 @@
-
-from dao.OfrendasDao import Gestion_ofrendasDao
+from josue.dao.OfrendasDao import Gestion_ofrendasDao
 import os
 from datetime import datetime
+
 
 def mostrar_menu():
     print("\n======= Gestión de Ofrendas =======")
@@ -50,8 +50,8 @@ def main():
                 input("Presiona Enter para continuar...")
 
             elif opcion == "5":
-                print("Saliendo del programa...")
-                exit()
+                print("Regresando al menu principal...")
+                break
 
             else:
                 print("Opción inválida. Por favor, elige entre 1 y 5.")

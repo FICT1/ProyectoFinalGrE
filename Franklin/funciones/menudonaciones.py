@@ -1,6 +1,6 @@
-from dao.dao_donaciones import DonacionesDAO
-from models.donacionextra import DonacionesExtra
-from models.donacion_especie import DonacionesEspecie
+from franklin.dao.dao_donaciones import DonacionesDAO
+from franklin.models.donacionextra import DonacionesExtra
+from franklin.models.donacion_especie import DonacionesEspecie
 
 def sub_menu():
     print("-------Bienvenido al apartado de donaciones extras-------")
@@ -112,7 +112,7 @@ def main ():
             pausa()
 
         elif op == "7":
-            print("Gracias por usar este apartado:)")
+            print("Regresando al menu principal...")
             break
 
         else: 

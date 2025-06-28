@@ -1,16 +1,21 @@
+from jorge.dao.manipular import Manipular
+from jorge.dao.guardar import Archivo
+from jorge.modelos.participantes import Participante
+
+import os
+import time
+
+
 def limpiar():
-    import os
     os.system("cls || clear")
 
 def esperar():
-    import time
     time.sleep(2)
 
 def pantalla_buscando():
-    import time
-    for i in range(1,11):
+    for i in range(1, 11):
         limpiar()
-        print(f"Buscando", "*" * i, " "*1, f"{i*10}%")
+        print(f"Buscando", "*" * i, " " * 1, f"{i*10}%")
         time.sleep(0.4)
     limpiar()
 
@@ -27,10 +32,12 @@ def menu():
     print("1 = Agregar diezmos \n2 = Mostrar total diezmos \n3 = Buscar diezmos")
     print("4 = Eliminar diezmos \n5 = Salir")
     print("="*34)
+
 def realizar(op):
-    from modelos.participantes import Participante
-    from dao.manipular import Manipular
-    from dao.guardar import Archivo
+    # Usa imports absolutos para que funcione con el paquete
+    from jorge.modelos.participantes import Participante
+    from jorge.dao.manipular import Manipular
+    from jorge.dao.guardar import Archivo
 
     manipular = Manipular()
     mi_archivo = Archivo("Lista.txt")
@@ -125,8 +132,9 @@ def realizar(op):
 
     elif op == "5":
         limpiar()
-        terminar()
-        
+        print("Regresando al menu principal...")
+        return
+
 def main():
     while True:
         limpiar()
@@ -134,7 +142,10 @@ def main():
         opcion = input(" \nIntroduzca la operacion a realizar: ").lower()
         try:
             opcion = int(opcion)
-            if opcion > 5:
+            if opcion == 5:
+                print("Regresando al menu principal...")
+                break
+            elif opcion > 5:
                 print("Debe introducir una de las cinco opciones")
                 esperar()
             else:

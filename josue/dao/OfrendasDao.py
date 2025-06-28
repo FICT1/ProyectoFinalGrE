@@ -1,7 +1,8 @@
 # dao/OfrendasDao.py
+from josue.models.ofrendas import HistoriaOfrendas_dao
 import os
 from datetime import datetime
-from models.ofrendas import HistoriaOfrendas_dao
+
 
 ARCHIVO_OFRENDAS = "Historial_Ofrendas.txt"
 

@@ -1,6 +1,6 @@
-import os 
-from models.donacionextra import DonacionesExtra
-from models.donacion_especie import DonacionesEspecie
+from franklin.models.donacionextra import DonacionesExtra
+from franklin.models.donacion_especie import DonacionesEspecie
+import os
 
 ARCHIVO_DONACIONES = "Donaciones Monetarias.txt"
 ARCHIVO_ESPECIE = "Donaciones Especie.txt"
