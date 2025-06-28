@@ -28,7 +28,7 @@ def menu_principal():
             break  # Termina todo el programa
         else:
             print("Opción inválida. Intente nuevamente.")
-            lim()
+            
 
 def main():
     menu_principal()

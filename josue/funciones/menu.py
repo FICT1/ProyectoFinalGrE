@@ -51,6 +51,7 @@ def main():
 
             elif opcion == "5":
                 print("Regresando al menu principal...")
+                input("Presiona Enter para continuar...")
                 break
 
             else:
@@ -59,4 +60,4 @@ def main():
         except ValueError:
              print("error")
              continue
-    main()
+        
