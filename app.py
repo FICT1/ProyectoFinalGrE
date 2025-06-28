@@ -1,4 +1,9 @@
-from menuprincipal.menup import main
+from menuprincipal import menup
+import time
 
-if __name__ == "__main__":
-    main()
+resultados = menup.iniciar_sesion()
+
+if resultados == True:
+    print("Bienvenido")
+    time.sleep(2)
+    menup.main()

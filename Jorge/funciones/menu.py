@@ -1,6 +1,6 @@
-from jorge.dao.manipular import Manipular
-from jorge.dao.guardar import Archivo
-from jorge.modelos.participantes import Participante
+from Jorge.dao.manipular import Manipular
+from Jorge.dao.guardar import Archivo
+from Jorge.modelos.participantes import Participante
 
 import os
 import time
@@ -35,15 +35,10 @@ def menu():
 
 def realizar(op):
     # Usa imports absolutos para que funcione con el paquete
-    from jorge.modelos.participantes import Participante
-    from jorge.dao.manipular import Manipular
-    from jorge.dao.guardar import Archivo
 
     manipular = Manipular()
     mi_archivo = Archivo("Lista.txt")
     mi_archivo.generar_archivo()
-
-    lista_diezmo = []
 
     if op == "1":
         i = 0
@@ -58,7 +53,6 @@ def realizar(op):
 
             part = Participante(nombre.title(), apellido.title(), donado)
             manipular.agregar(part)
-            lista_diezmo.append(donado) 
 
             salir = input(" \n¿Terminar? (s/n): ").strip()
             if salir.lower() == "s":
@@ -91,16 +85,16 @@ def realizar(op):
             print("Sin contenido")
         else:
             print("1 = Buscar por ID \n2 = Buscar por nombre y apellido")
-            decision = input(" \nIngrese su decision: ")
+            decision = input(" \nIngrese su decision: ").strip()
             if decision == "1":
                 limpiar()
-                id = input("Introduzca el ID del donante a buscar: ")
+                id = input("Introduzca el ID del donante a buscar: ").strip()
                 pantalla_buscando()
                 manipular.buscar(id)
             elif decision == "2":
                 limpiar()
-                nombre = input("Escriba el nombre del donante a buscar: ")
-                apellido = input("Escriba el apellido del donante a buscar: ")
+                nombre = input("Escriba el nombre del donante a buscar: ").strip()
+                apellido = input("Escriba el apellido del donante a buscar: ").strip()
                 d = f"{nombre.title()} {apellido.title()}"
                 pantalla_buscando()
                 manipular.buscar(d)
@@ -113,17 +107,17 @@ def realizar(op):
             print("Sin contenido")
         else:
             print("1 = Buscar por ID para eliminar \n2 = Buscar por nombre y apellido para eliminar\n")
-            decision = input("Ingrese su decision: ")
+            decision = input("Ingrese su decision: ").strip()
             if decision == "1":
                 limpiar()
-                id = input("Introduzca el ID del donante para eliminar: ")
+                id = input("Introduzca el ID del donante para eliminar: ").strip()
                 pantalla_buscando()
                 manipular.eliminar(id)
                 manipular.eliminar_en_respaldo(id)
             elif decision == "2":
                 limpiar()
-                nombre = input("Escriba el nombre del donante a eliminar: ")
-                apellido = input("Escriba el apellido del donante a eliminar: ")
+                nombre = input("Escriba el nombre del donante a eliminar: ").strip()
+                apellido = input("Escriba el apellido del donante a eliminar: ").strip()
                 g = f"{nombre.title()} {apellido.title()}"
                 pantalla_buscando()
                 manipular.eliminar(g)
