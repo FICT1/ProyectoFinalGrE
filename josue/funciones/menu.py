@@ -32,7 +32,6 @@ def main():
         try:
 
             if opcion == "1":
-            
                     monto = float(input("Ingresa el monto de la ofrenda: C$ "))
                     gestion.archivar_ofrendas(monto)
                     input("Presiona Enter para continuar...")
@@ -52,7 +51,7 @@ def main():
 
             elif opcion == "5":
                 print("Saliendo del programa...")
-                break
+                exit()
 
             else:
                 print("Opción inválida. Por favor, elige entre 1 y 5.")

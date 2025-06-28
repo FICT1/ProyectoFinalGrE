@@ -45,8 +45,8 @@ def realizar(op):
             limpiar()
             i += 1
             print(f"Participante #{i}:")
-            nombre = input("Escriba el nombre del participante (solo el nombre): ")
-            apellido = input("Escriba el apellido del participante (solo el apellido): ")
+            nombre = input("Escriba el nombre del participante (solo el nombre): ").strip()
+            apellido = input("Escriba el apellido del participante (solo el apellido): ").strip()
             donado = float(input("Introduzca la cantidad donada por el participante: "))
 
             part = Participante(nombre.title(), apellido.title(), donado)
@@ -79,44 +79,49 @@ def realizar(op):
 
     elif op == "3":
         limpiar()
-        print("1 = Buscar por ID \n2 = Buscar por nombre y apellido")
-        decision = input(" \nIngrese su decision: ")
-        if decision == "1":
-            limpiar()
-            id = input("Introduzca el ID del donante a buscar: ")
-            pantalla_buscando()
-            manipular.buscar(id)
-        elif decision == "2":
-            limpiar()
-            nombre = input("Escriba el nombre del donante a buscar: ")
-            apellido = input("Escriba el apellido del donante a buscar: ")
-            d = f"{nombre.title()} {apellido.title()}"
-            pantalla_buscando()
-            manipular.buscar(d)
+        resultados = mi_archivo.comprobar()
+        if resultados == True:
+            print("Sin contenido")
+        else:
+            print("1 = Buscar por ID \n2 = Buscar por nombre y apellido")
+            decision = input(" \nIngrese su decision: ")
+            if decision == "1":
+                limpiar()
+                id = input("Introduzca el ID del donante a buscar: ")
+                pantalla_buscando()
+                manipular.buscar(id)
+            elif decision == "2":
+                limpiar()
+                nombre = input("Escriba el nombre del donante a buscar: ")
+                apellido = input("Escriba el apellido del donante a buscar: ")
+                d = f"{nombre.title()} {apellido.title()}"
+                pantalla_buscando()
+                manipular.buscar(d)
         regresar()
 
     elif op == "4":
         limpiar()
-        print("1 = Buscar por ID para eliminar \n2 = Buscar por nombre y apellido para eliminar\n")
-        decision = input("Ingrese su decision: ")
-        if decision == "1":
-            limpiar()
-            id = input("Introduzca el ID del donante para eliminar: ")
-            pantalla_buscando()
-            manipular.eliminar(id)
-            manipular.eliminar_en_respaldo(id)
-            print(f"Diezmo con ID '{id}' eliminado correctamente")
-            regresar()
-        elif decision == "2":
-            limpiar()
-            nombre = input("Escriba el nombre del donante a eliminar: ")
-            apellido = input("Escriba el apellido del donante a eliminar: ")
-            g = f"{nombre.title()} {apellido.title()}"
-            pantalla_buscando()
-            manipular.eliminar(g)
-            manipular.eliminar_en_respaldo(g)
-            print(f"Diezmo '{g}' eliminado correctamente")
-            regresar()
+        resultados = mi_archivo.comprobar()
+        if resultados == True:
+            print("Sin contenido")
+        else:
+            print("1 = Buscar por ID para eliminar \n2 = Buscar por nombre y apellido para eliminar\n")
+            decision = input("Ingrese su decision: ")
+            if decision == "1":
+                limpiar()
+                id = input("Introduzca el ID del donante para eliminar: ")
+                pantalla_buscando()
+                manipular.eliminar(id)
+                manipular.eliminar_en_respaldo(id)
+            elif decision == "2":
+                limpiar()
+                nombre = input("Escriba el nombre del donante a eliminar: ")
+                apellido = input("Escriba el apellido del donante a eliminar: ")
+                g = f"{nombre.title()} {apellido.title()}"
+                pantalla_buscando()
+                manipular.eliminar(g)
+                manipular.eliminar_en_respaldo(g)
+        regresar()
 
     elif op == "5":
         limpiar()

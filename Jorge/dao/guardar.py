@@ -35,3 +35,11 @@ class Archivo:
             print(f"Respaldo creado: Respaldo.txt")
         else:
             print("El archivo no existe, no se puede crear un respaldo.")
+    
+    def comprobar(self):
+        with open(self.ruta_archivo,"r") as archivo:
+            lineas = archivo.readlines()
+            if len(lineas) == 1 or len(lineas) == 0:
+                return True
+            else:
+                return False
