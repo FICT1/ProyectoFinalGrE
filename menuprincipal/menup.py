@@ -1,21 +1,31 @@
-from Franklin.funciones.menudonaciones import main as main_franklin
-from Jorge.funciones.menu import main as main_jorge
+from franklin.funciones.menudonaciones import main as main_franklin
+from jorge.funciones.menu import main as main_jorge
 from josue.funciones.menu import main as main_josue
-import os, pwinput, time
+import os, pwinput, time #instalar con pip el pwinput
+import pyfiglet #instalar con pip
 
 def lim():
-    os.system("cls || clear")
+    os.system("cls || clear") #limpiar pantalla
 
 def menu_principal():
     while True:
         lim()
-        print("======= Menú Principal =======")
-        print("1. Menú de donaciones (Bonos extra)")
-        print("2. Menú de diezmos")
-        print("3. Menú de ofrendas")
+
+        # Título en grande con pyfiglet
+        titulo = pyfiglet.figlet_format("Iglesia Cristiana", font="standard")
+        print(titulo)
+
+        # Menú visual con estilo profesional
+        print("=" * 40)
+        print("              MENÚ PRINCIPAL              ")
+        print("=" * 40)
+        print("1. Menú de Donaciones (Bonos extra)")
+        print("2. Menú de Diezmos")
+        print("3. Menú de Ofrendas")
         print("4. Salir")
-        print("================================")
-        opcion = input("Seleccione una opción: ")
+        print("=" * 40)
+
+        opcion = input("Seleccione una opción: ").strip()
 
         if opcion == "1":
             main_franklin()
@@ -24,13 +34,17 @@ def menu_principal():
         elif opcion == "3":
             main_josue()
         elif opcion == "4":
-            print("Saliendo del programa. ¡Gracias!")
-            break  # Termina todo el programa
+            print("\nSaliendo del programa. ¡Que Dios lo bendiga!\n")
+            break
         else:
-            print("Opción inválida. Intente nuevamente.")
+            print("\nOpción inválida. Intente nuevamente.")
+            time.sleep(2)
+
             
 def iniciar_sesion():
-    usarios_claves = ["Usuario: Jorge, Clave: 123J","Usuario: Frank, Clave: 123F","Usuario: Josue, Clave: 123S"]
+    usarios_claves = ["Usuario: Jorge, Clave: 123J",
+                      "Usuario: Frank, Clave: 123F",
+                      "Usuario: Josue, Clave: 123S"]
     while True:
         lim()
         print("======= Confirmacion de acceso =======")

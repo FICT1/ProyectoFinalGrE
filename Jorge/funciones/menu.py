@@ -1,6 +1,6 @@
-from Jorge.dao.manipular import Manipular
-from Jorge.dao.guardar import Archivo
-from Jorge.modelos.participantes import Participante
+from jorge.dao.manipular import Manipular
+from jorge.dao.guardar import Archivo
+from jorge.modelos.participantes import Participante
 
 import os
 import time
