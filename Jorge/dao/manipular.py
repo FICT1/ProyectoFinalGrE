@@ -47,7 +47,11 @@ class Manipular:
                         break
                 archivo.writelines(lineas)
         else:
+<<<<<<< HEAD
             print("El archivo no existe.")      
+=======
+            print("El archivo no existe.")        
+>>>>>>> origin
 
     def mostrar(self):
         return self.lista

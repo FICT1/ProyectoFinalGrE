@@ -21,7 +21,11 @@ class Archivo:
         with open(self.ruta_archivo, "a") as archivo:
             for i in self.lista:
                 archivo.write(i)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin
     def comprobar(self):
         with open(self.ruta_archivo,"r") as archivo:
             lineas = archivo.readlines()
