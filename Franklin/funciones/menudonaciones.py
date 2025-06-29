@@ -1,6 +1,6 @@
-from franklin.dao.dao_donaciones import DonacionesDAO
-from franklin.models.donacionextra import DonacionesExtra
-from franklin.models.donacion_especie import DonacionesEspecie
+from Franklin.dao.dao_donaciones import DonacionesDAO
+from Franklin.models.donacionextra import DonacionesExtra
+from Franklin.models.donacion_especie import DonacionesEspecie
 
 def sub_menu():
     print("-------Bienvenido al apartado de donaciones extras-------")

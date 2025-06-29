@@ -47,18 +47,7 @@ class Manipular:
                         break
                 archivo.writelines(lineas)
         else:
-            print("El archivo no existe.")
-
-    def eliminar_en_respaldo(self,d):
-        if os.path.exists("Respaldo.txt"):
-            with open("Respaldo.txt", "r", encoding="utf-8") as archivo:
-                lineas = archivo.readlines()
-            with open("Respaldo.txt", "w", encoding="utf-8") as archivo:
-                for linea in lineas:
-                    if d in linea:
-                        lineas.remove(linea)
-                        break
-                archivo.writelines(lineas)         
+            print("El archivo no existe.")        
 
     def mostrar(self):
         return self.lista

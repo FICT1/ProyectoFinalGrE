@@ -1,5 +1,5 @@
-from franklin.funciones.menudonaciones import main as main_franklin
-from jorge.funciones.menu import main as main_jorge
+from Franklin.funciones.menudonaciones import main as main_franklin
+from Jorge.funciones.menu import main as main_jorge
 from josue.funciones.menu import main as main_josue
 import os, pwinput, time #instalar con pip el pwinput
 import pyfiglet #instalar con pip

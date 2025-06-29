@@ -12,5 +12,5 @@ class Participante:
 
     def __str__(self):
         return (
-            f"{self.id}) {self.nombre} {self.apellido}: C${self.donado:,}\n"
+            f"ID-{self.id}) {self.nombre} {self.apellido}: C${self.donado:,}\n"
         )

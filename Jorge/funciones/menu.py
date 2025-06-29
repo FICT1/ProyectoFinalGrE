@@ -1,6 +1,6 @@
-from jorge.dao.manipular import Manipular
-from jorge.dao.guardar import Archivo
-from jorge.modelos.participantes import Participante
+from Jorge.dao.manipular import Manipular
+from Jorge.dao.guardar import Archivo
+from Jorge.modelos.participantes import Participante
 
 import os
 import time
@@ -67,7 +67,6 @@ def realizar(op):
 
         print("==========================================")
         print("Informacion guardada en el archivo 'Lista.txt'")
-        mi_archivo.respaldar()
         print("==========================================")
 
         regresar()
@@ -113,7 +112,6 @@ def realizar(op):
                 id = input("Introduzca el ID del donante para eliminar: ").strip()
                 pantalla_buscando()
                 manipular.eliminar(id)
-                manipular.eliminar_en_respaldo(id)
             elif decision == "2":
                 limpiar()
                 nombre = input("Escriba el nombre del donante a eliminar: ").strip()
@@ -121,7 +119,6 @@ def realizar(op):
                 g = f"{nombre.title()} {apellido.title()}"
                 pantalla_buscando()
                 manipular.eliminar(g)
-                manipular.eliminar_en_respaldo(g)
         regresar()
 
     elif op == "5":
