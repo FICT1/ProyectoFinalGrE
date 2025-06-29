@@ -22,20 +22,6 @@ class Archivo:
             for i in self.lista:
                 archivo.write(i)
     
-    def respaldar(self):
-        if os.path.exists(self.ruta_archivo):
-            with open(self.ruta_archivo, "r") as archivo:
-                contenido = archivo.readlines()
-            with open("Respaldo.txt","w") as respaldo:
-                respaldo.writelines(contenido)
-                for i in contenido:
-                    if i.startswith("Lista de Diezmos:\n"):
-                        contenido.remove(i)
-                    self.guardar_componentes(i)
-            print(f"Respaldo creado: Respaldo.txt")
-        else:
-            print("El archivo no existe, no se puede crear un respaldo.")
-    
     def comprobar(self):
         with open(self.ruta_archivo,"r") as archivo:
             lineas = archivo.readlines()
