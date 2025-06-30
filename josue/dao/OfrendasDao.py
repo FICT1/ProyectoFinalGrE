@@ -3,16 +3,21 @@ from josue.models.ofrendas import HistoriaOfrendas_dao
 import os
 from datetime import datetime
 
-
+# Ruta del archivo donde se guardarán las ofrendas
 ARCHIVO_OFRENDAS = "Historial_Ofrendas.txt"
 
+# Clase para gestionar el registro, almacenamiento, eliminación y visualización de ofrendas.
+# Atributos:
+# ofrendas (list): Lista que contiene las instancias de ofrendas cargadas desde el archivo.
 class Gestion_ofrendasDao:
+
+    # Inicializa la clase cargando las ofrendas existentes desde el archivo.
     def __init__(self):
         self.ofrendas = []
         self.cargar_ofrendas()
 
+    # Carga las ofrendas desde el archivo al iniciar.
     def cargar_ofrendas(self):
-        """Carga las ofrendas desde el archivo al iniciar."""
         os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
         if os.path.exists(ARCHIVO_OFRENDAS):
             try:
@@ -35,8 +40,8 @@ class Gestion_ofrendasDao:
         else:
             print(f"Archivo {ARCHIVO_OFRENDAS} no encontrado. Se creará al guardar.")
 
+    # Guarda las ofrendas en el archivo como texto plano, sobrescribiendo el existente.
     def guardar_ofrendas(self):
-        """Guarda las ofrendas en el archivo como texto plano, sobrescribiendo el existente."""
         os.makedirs(os.path.dirname(ARCHIVO_OFRENDAS) or ".", exist_ok=True)
         try:
             with open(ARCHIVO_OFRENDAS, "w", encoding='utf-8') as archivo:
@@ -48,9 +53,9 @@ class Gestion_ofrendasDao:
         except Exception as e:
             print(f"Error inesperado al guardar ofrendas: {e}")
             raise
-
+    
+    # Archiva una nueva ofrenda con la fecha actual.
     def archivar_ofrendas(self, monto):
-        """Archiva una nueva ofrenda con la fecha actual."""
         try:
             monto = float(monto)
             if monto <= 0:
@@ -80,8 +85,8 @@ class Gestion_ofrendasDao:
             print(f"Error inesperado al archivar ofrenda: {e}")
             raise
 
+    # Muestra una lista del historial de ofrendas ingresadas con su fecha y monto.
     def mostrar_ofrendas(self):
-        """Muestra una lista del historial de ofrendas ingresadas con su fecha y monto."""
         if not self.ofrendas:
             print("No hay ofrendas archivadas.")
             return
@@ -100,8 +105,8 @@ class Gestion_ofrendasDao:
                 print(f"Error al procesar una ofrenda: {e}")
         print("=" * 24)
 
+    # Elimina una ofrenda por monto con opción de selección por fecha.
     def eliminar_ofrenda(self, monto):
-        """Elimina una ofrenda por monto con opción de selección por fecha."""
         if not os.path.exists(ARCHIVO_OFRENDAS):
             print("No hay ofrendas archivadas.")
             return False
@@ -114,6 +119,7 @@ class Gestion_ofrendasDao:
             with open(ARCHIVO_OFRENDAS, "r", encoding='utf-8') as archivo:
                 lineas = archivo.readlines()
 
+            # Buscar coincidencias por monto (considerando pequeños errores de redondeo)
             coincidencias = [(fecha, m, linea) for linea in lineas if linea.strip()
                            for fecha, m in [linea.strip().split(", ")]
                            if abs(float(m) - monto) < 0.01]
@@ -150,6 +156,7 @@ class Gestion_ofrendasDao:
                     print("Entrada inválida.")
                     return False
 
+            # Escribir archivo actualizado
             with open(ARCHIVO_OFRENDAS, "w", encoding='utf-8') as archivo:
                 archivo.writelines(nuevas_lineas)
             return True
@@ -164,8 +171,8 @@ class Gestion_ofrendasDao:
             print(f"Error inesperado: {e}")
             return False
 
+    # Calcula y muestra el total de todas las ofrendas.
     def calcular_total_ofrendas(self):
-        """Calcula y muestra el total de todas las ofrendas."""
         if not self.ofrendas:
             print("No hay ofrendas archivadas para calcular el total.")
             return 0.0

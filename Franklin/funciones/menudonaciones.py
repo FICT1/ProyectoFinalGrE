@@ -1,7 +1,11 @@
+# Módulo de menú interactivo para gestionar donaciones monetarias y en especie.
+# Este archivo actúa como interfaz de usuario para las funcionalidades del DAO.
+
 from Franklin.dao.dao_donaciones import DonacionesDAO
 from Franklin.models.donacionextra import DonacionesExtra
 from Franklin.models.donacion_especie import DonacionesEspecie
 
+# Funcion que muestra el menu principal de donaciones y retorna la opción elegida
 def sub_menu():
     print("-------Bienvenido al apartado de donaciones extras-------")
     print("=============================================================")
@@ -17,20 +21,26 @@ def sub_menu():
     print("=============================================================")
     return input("-> ")
 
+# Funcion encargada de limpiar la pantalla
 def lim():
     import os
     os.system("cls || clear")
 
+# Pausa la ejecución hasta que el usuario presione Enter
 def pausa():
     input("Presiona Enter para continuar...")
 
-
+# Función principal que controla el flujo del menu
 def main ():
+
     dao=DonacionesDAO()
-    dao.cargar_datos()
+    dao.cargar_datos()      # Cargar datos almacenados desde archivos de texto
+
     while True:
         lim()
         op=sub_menu()
+
+        # Opción 1: Agregar donación monetaria
         if op=="1":
             nombre=input("Ingrese su nombre \n-> ")
             try:
@@ -44,6 +54,7 @@ def main ():
                 print(f"Error: Porfavor ingrese un monto valido")
             pausa()
         
+        # Opción 2: Agregar donación en especie
         elif op == "2":
             nombre = input("Ingrese su nombre \n-> ")
             especie = input("Ingrese la especie \n-> ")
@@ -52,7 +63,8 @@ def main ():
             dao.agregar_donacion_especie(especie)
             print("Donacion agregada con exito")
             pausa()
-
+        
+        # Opción 3: Ver donaciones monetarias
         elif op == "3":
             if not dao.donaciones:
                 print("No hay donaciones monetarias")
@@ -65,6 +77,7 @@ def main ():
                 print(f"\nTotal equivalente en USD: ${total_usd:.2f}")
             pausa()
 
+        # Opción 4: Ver donaciones en especie
         elif op == "4":
             if not dao.donaciones_especie:
                 print("No hay donaciones en especie")
@@ -74,6 +87,7 @@ def main ():
                     print(f"({i}) {d}")
             pausa()
 
+        # Opción 5: Eliminar donación monetaria
         elif op == "5":
             if not dao.donaciones:
                 print("No hay donaciones monetarias para eliminar.")
@@ -92,7 +106,7 @@ def main ():
                     print("Entrada inválida.")
             pausa()
 
-
+        # Opción 6: Eliminar donación en especie
         elif op == "6":
             if not dao.donaciones_especie:
                 print("No hay donaciones en especie para eliminar.")
@@ -111,13 +125,16 @@ def main ():
                     print("Entrada inválida.")
             pausa()
 
+        # Opción 7: Salir del menu
         elif op == "7":
             print("Regresando al menu principal...")
             break
-
+        
+        # Por si el usuario no introdujo una de las 7 opciones disponibles
         else: 
             print("Opcion no valida")
             pausa()
 
+    # Guardar datos al salir
     dao.guardar_donaciones()
     dao.guardar_especies()
